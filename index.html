@@ -1,0 +1,48 @@
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>( ..)φメモメモ</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="css/reset.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+	<div id="app" class="uiMemo">
+		<h1 class="pageTit">やったことリスト</h1>
+		<div class="postArea">
+			<input type="text" placeholder="やったこと" v-model="newItemTitle">
+			<textarea placeholder="詳細" v-model="newItemDetail" name="" id="" cols="30" rows="5"></textarea>
+			<button v-on:click="addItem(newItemTitle, newItemDetail)" class="postBtn">メモする</button>
+		</div>
+		<ul class="memoList">
+			<li v-for="(item, index) in items":key="index">
+				<p>{{index}}</p>
+				<p>{{ item.title }}</p>
+				<p>{{ item.detail }}</p>
+				<p>{{ item.postDate }}</p>
+				<div class="btn">
+					<button class="editBtn" v-on:click="showEditModal(index)">編集</button>
+					<button v-on:click="deleteItem(index)" class="deleteBtn">削除</button>
+				</div>
+			</li>
+		</ul>
+		<transition name="fade">
+		<div v-if="show" class="editModal">
+			<div class="inner">
+				<input type="text" placeholder="やったこと"  v-model="editItemTitle">
+				<textarea placeholder="詳細" name="" id="" cols="30" rows="5" v-model="editItemDetail"></textarea>
+				<div class="btn">
+					<button v-on:click="addItem(editItemTitle, editItemDetail, editIndex)" class="editBtn">編集する</button>
+					<p class="cancel" v-on:click="editCancel">やめる</p>
+				</div>
+			</div>
+		</div>
+		</transition>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="js/script.js"></script>
+</body>
+</html>
