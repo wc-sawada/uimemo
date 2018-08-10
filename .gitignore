@@ -1,0 +1,8 @@
+## node
+node_modules/*
+
+## css
+css/*
+
+# Garbage files
+.DS_Store
